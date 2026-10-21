@@ -10,7 +10,11 @@
     "dev": "turbo run dev",
     "typecheck": "turbo run typecheck",
     "lint": "biome check .",
-    "lint:fix": "biome check --write ."
+    "lint:fix": "biome check --write .",
+    "db:generate": "turbo run generate",
+    "db:migrate": "pnpm --filter @repo/database run migrate",
+    "db:deploy": "pnpm --filter @repo/database run deploy",
+    "setup": "pnpm install && pnpm db:generate"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.2",

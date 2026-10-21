@@ -1,0 +1,37 @@
+generator client {
+  provider               = "prisma-client"
+  output                 = "../generated/client"
+  runtime                = "nodejs"
+  moduleFormat           = "esm"
+  importFileExtension    = "js"
+  generatedFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Link {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  code      String   @unique @db.VarChar(16)
+  url       String
+  title     String?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  clicks Click[]
+
+  @@map("links")
+}
+
+model Click {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  linkId    String   @map("link_id") @db.Uuid
+  userAgent String?  @map("user_agent")
+  referer   String?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  link Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([linkId])
+  @@map("clicks")
+}
