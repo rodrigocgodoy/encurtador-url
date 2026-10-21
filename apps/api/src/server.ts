@@ -1,10 +1,7 @@
-import Fastify from 'fastify'
-import { plugin } from '@/plugin.js'
+import { buildApp } from '@/app.js'
 import { env } from '@/utils/environment.js'
 
-const app = Fastify({ logger: { level: env.LOG_LEVEL } })
-
-await app.register(plugin)
+const app = await buildApp({ logger: { level: env.LOG_LEVEL } })
 
 for (const signal of ['SIGINT', 'SIGTERM'] as const) {
   process.once(signal, async () => {

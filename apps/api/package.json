@@ -4,10 +4,13 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "openapi": "tsx src/scripts/generate-openapi.ts"
   },
   "dependencies": {
     "@fastify/cors": "^11.3.1",
+    "@fastify/swagger": "^9.9.2",
+    "@scalar/fastify-api-reference": "^1.75.1",
     "fastify": "5",
     "fastify-type-provider-zod": "7",
     "zod": "4"

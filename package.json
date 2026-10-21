@@ -14,7 +14,8 @@
     "db:generate": "turbo run generate",
     "db:migrate": "pnpm --filter @repo/database run migrate",
     "db:deploy": "pnpm --filter @repo/database run deploy",
-    "setup": "pnpm install && pnpm db:generate"
+    "setup": "pnpm install && pnpm db:generate && pnpm openapi",
+    "openapi": "pnpm --filter @repo/api run openapi"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.2",
