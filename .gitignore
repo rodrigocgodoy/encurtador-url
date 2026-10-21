@@ -1,0 +1,27 @@
+# Dependências
+node_modules/
+
+# Build e cache
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Prisma client gerado
+packages/database/generated/
+
+# Ambiente
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# SO / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
