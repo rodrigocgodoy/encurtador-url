@@ -9,7 +9,6 @@ if (existsSync(envPath)) {
 }
 
 const environmentSchema = z.object({
-  QUALQUER_ENV: z.string().min(1),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   HOST: z.string().default('0.0.0.0'),
   PORT: z.coerce.number().int().positive().default(3333),
