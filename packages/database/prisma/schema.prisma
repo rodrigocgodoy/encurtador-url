@@ -27,6 +27,7 @@ model Click {
   id        String   @id @default(uuid(7)) @db.Uuid
   linkId    String   @map("link_id") @db.Uuid
   userAgent String?  @map("user_agent")
+  referer   String?
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
 
   link Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
