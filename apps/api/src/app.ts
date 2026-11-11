@@ -16,7 +16,10 @@ export async function buildApp(options: FastifyServerOptions = {}) {
         description: 'API de um encurtador de URL com analytics',
         version: '1.0.0',
       },
-      tags: [{ name: 'health', description: 'Saúde da API' }],
+      tags: [
+        { name: 'health', description: 'Saúde da API' },
+        { name: 'links', description: 'Links encurtados' },
+      ],
     },
     transform: jsonSchemaTransform,
   })
