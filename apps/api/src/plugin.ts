@@ -10,8 +10,12 @@ import {
 import { routes } from '@/routes.js'
 import { createServices } from '@/services.js'
 import { env } from '@/utils/environment.js'
+import { HttpError } from '@/utils/errors.js'
 
-function isClientError(error: unknown): error is FastifyError & { statusCode: number } {
+// Erros de cliente (< 500) e HttpError lançados de propósito (ex.: 503) voltam com a mensagem;
+// qualquer outro erro vira 500 genérico
+function isExposableError(error: unknown): error is FastifyError & { statusCode: number } {
+  if (error instanceof HttpError) return true
   return (
     error instanceof Error &&
     'statusCode' in error &&
@@ -44,7 +48,7 @@ export async function plugin(app: FastifyInstance) {
 
     if (isResponseSerializationError(error)) {
       request.log.error({ err: error, issues: error.cause.issues }, 'resposta fora do schema')
-    } else if (isClientError(error)) {
+    } else if (isExposableError(error)) {
       return reply.status(error.statusCode).send({
         statusCode: error.statusCode,
         error: STATUS_CODES[error.statusCode] ?? 'Error',

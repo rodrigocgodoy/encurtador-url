@@ -23,6 +23,11 @@ const environmentSchema = z.object({
     .string()
     .default('*')
     .transform((value) => (value === '*' ? true : value.split(',').map((origin) => origin.trim()))),
+  // Opcional: sem ela, as rotas de IA respondem 503. Vazio no .env conta como ausente
+  ANTHROPIC_API_KEY: z
+    .string()
+    .optional()
+    .transform((value) => value?.trim() || undefined),
 })
 
 const parsed = environmentSchema.safeParse(process.env)

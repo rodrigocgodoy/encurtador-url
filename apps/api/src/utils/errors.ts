@@ -18,6 +18,13 @@ export class NotFoundError extends HttpError {
   }
 }
 
+export class ServiceUnavailableError extends HttpError {
+  constructor(message = 'Serviço indisponível') {
+    super(503, message)
+    this.name = 'ServiceUnavailableError'
+  }
+}
+
 // Formato que o error handler devolve; usado no `response` das rotas
 export const errorResponseSchema = z.object({
   statusCode: z.number().int(),

@@ -267,6 +267,106 @@ paths:
                   - error
                   - message
                 additionalProperties: false
+  /links/{code}/titulo:
+    post:
+      summary: Gera com IA um título curto para o link e salva no campo title
+      tags:
+        - ia
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+            maxLength: 16
+          in: path
+          name: code
+          required: true
+          description: Código curto do link
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Código curto do link
+                  title:
+                    type: string
+                    description: Título sugerido pela IA e salvo no link
+                required:
+                  - code
+                  - title
+                additionalProperties: false
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    minimum: -9007199254740991
+                    maximum: 9007199254740991
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  issues:
+                    description: Presente só em erros de validação (400)
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        message:
+                          type: string
+                      required:
+                        - path
+                        - message
+                      additionalProperties: false
+                required:
+                  - statusCode
+                  - error
+                  - message
+                additionalProperties: false
+        "503":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    minimum: -9007199254740991
+                    maximum: 9007199254740991
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  issues:
+                    description: Presente só em erros de validação (400)
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        message:
+                          type: string
+                      required:
+                        - path
+                        - message
+                      additionalProperties: false
+                required:
+                  - statusCode
+                  - error
+                  - message
+                additionalProperties: false
 tags:
   - name: health
     description: Saúde da API
